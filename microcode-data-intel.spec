@@ -21,13 +21,13 @@ definitions for all Intel processors.
 %build
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
+install -d $RPM_BUILD_ROOT/lib/firmware
 
-install microcode*.dat $RPM_BUILD_ROOT%{_sysconfdir}/microcode.dat
+install microcode*.dat $RPM_BUILD_ROOT/lib/firmware/microcode.dat
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) %{_sysconfdir}/microcode.dat
+%attr(640,root,root) /lib/firmware/microcode.dat
