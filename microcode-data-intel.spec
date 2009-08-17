@@ -8,7 +8,7 @@ Group:		Base
 Source0:	http://downloadmirror.intel.com/14303/eng/microcode-%{version}.tgz
 # Source0-md5:	5efec742621f830bd49ae11274766208
 Provides:	microcode-data
-ExclusiveArch:	i686 pentium2 pentium3 pentium4 x86_64 ia32e
+ExclusiveArch:	i686 pentium2 pentium3 pentium4 %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # nothing to put there
