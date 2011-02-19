@@ -1,12 +1,12 @@
 Summary:	Microcode definitions for Intel processors
 Name:		microcode-data-intel
-Version:	20100914
+Version:	20101123
 Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "microcode" to the search
-Source0:	http://downloadmirror.intel.com/19342/eng/microcode-%{version}.tgz
-# Source0-md5:	c6e765670173dd6e3d9a5c72f6cd1c40
+Source0:	http://downloadmirror.intel.com/19611/eng/microcode-%{version}.tgz
+# Source0-md5:	e19dd592d3357cd47e4d360ce43f4032
 Provides:	microcode-data
 ExclusiveArch:	i686 pentium2 pentium3 pentium4 %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
