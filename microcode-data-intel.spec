@@ -4,7 +4,7 @@ Version:	20111110
 Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
-# http://downloadcenter.intel.com/, enter "microcode" to the search
+# http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
 Source0:	http://downloadmirror.intel.com/20728/eng/microcode-%{version}.tgz
 # Source0-md5:	ba288eb9490986513e59c5a035c93a65
 Provides:	microcode-data
