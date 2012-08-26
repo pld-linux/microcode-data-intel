@@ -1,4 +1,5 @@
 Summary:	Microcode definitions for Intel processors
+Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
 Version:	20120606
 Release:	1
@@ -16,6 +17,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 The microcode data file for Linux contains the latest microcode
 definitions for all Intel processors.
+
+%description -l pl.UTF-8
+Te pliki danych mikrokodu dla Linuksa zawierają najnowsze definicje
+mikrokodu dla procesorów Intela.
 
 %prep
 %setup -q -c
