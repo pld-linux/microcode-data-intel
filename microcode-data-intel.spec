@@ -1,13 +1,13 @@
 Summary:	Microcode definitions for Intel processors
 Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
-Version:	20170511
+Version:	20170707
 Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
-Source0:	http://downloadmirror.intel.com/26798/eng/microcode-%{version}.tgz
-# Source0-md5:	167e6e1ff234567291f067f48e11d740
+Source0:	http://downloadmirror.intel.com/26925/eng/microcode-%{version}.tgz
+# Source0-md5:	fe4bcb12e4600629a81fb65208c34248
 # Tool for splitting Intel's microcode file. From Fedora
 Source1:	intel-microcode2ucode.c
 Provides:	microcode-data
