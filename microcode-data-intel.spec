@@ -1,3 +1,5 @@
+# TODO
+# - do not package intel-microcode2ucode and make package noarch, tool doesn't seem to be used runtime
 Summary:	Microcode definitions for Intel processors
 Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
