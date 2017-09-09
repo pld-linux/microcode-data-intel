@@ -2,7 +2,7 @@ Summary:	Microcode definitions for Intel processors
 Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
 Version:	20170707
-Release:	2
+Release:	3
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
@@ -39,6 +39,7 @@ Mikrokod dla procesorów Intel dla initrd.
 %prep
 %setup -qc
 
+
 %build
 if ! grep -q 0x00000000 microcode.dat; then
 	echo >&2 microcode.dat contains giberrish
@@ -51,15 +52,16 @@ fi
 ./intel-microcode2ucode microcode.dat > 1.log
 ./intel-microcode2ucode-single microcode.dat > 2.log
 
+install -d kernel/x86/microcode
+ln microcode.bin kernel/x86/microcode/GenuineIntel.bin
+echo kernel/x86/microcode/GenuineIntel.bin | cpio -o -H newc -R 0:0 > intel-ucode.img
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/lib/firmware,/boot}
 
-mv intel-ucode $RPM_BUILD_ROOT/lib/firmware
-
-install -d kernel/x86/microcode
-mv microcode.bin kernel/x86/microcode/GenuineIntel.bin
-echo kernel/x86/microcode/GenuineIntel.bin | cpio -o -H newc -R 0:0 > $RPM_BUILD_ROOT/boot/intel-ucode.img
+cp -a intel-ucode $RPM_BUILD_ROOT/lib/firmware
+cp -p intel-ucode.img $RPM_BUILD_ROOT/boot
 
 %clean
 rm -rf $RPM_BUILD_ROOT
