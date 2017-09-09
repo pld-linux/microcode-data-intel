@@ -47,8 +47,9 @@ fi
 
 %{__cc} %{rpmcflags} %{rpmcppflags} %{rpmldflags} -Wall -o intel-microcode2ucode %{SOURCE1}
 %{__cc} %{rpmcflags} %{rpmcppflags} %{rpmldflags} -Wall -o intel-microcode2ucode-single %{SOURCE2}
-./intel-microcode2ucode microcode.dat > /dev/null || exit 1
-./intel-microcode2ucode-single microcode.dat > /dev/null || exit 1
+
+./intel-microcode2ucode microcode.dat > 1.log
+./intel-microcode2ucode-single microcode.dat > 2.log
 
 %install
 rm -rf $RPM_BUILD_ROOT
