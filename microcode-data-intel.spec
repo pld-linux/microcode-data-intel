@@ -1,5 +1,3 @@
-# TODO
-# - do not package intel-microcode2ucode and make package noarch, tool doesn't seem to be used runtime
 Summary:	Microcode definitions for Intel processors
 Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
@@ -16,7 +14,7 @@ Source1:	intel-microcode2ucode.c
 Source2:	intel-microcode2ucode-single.c
 BuildRequires:	cpio
 Provides:	microcode-data
-ExclusiveArch:	i686 pentium2 pentium3 pentium4 %{x8664} x32
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -39,7 +37,7 @@ Intel microcode for initrd.
 Mikrokod dla procesorów Intel dla initrd.
 
 %prep
-%setup -q -c
+%setup -qc
 
 %build
 if ! grep -q 0x00000000 microcode.dat; then
@@ -54,12 +52,10 @@ fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},/lib/firmware,/boot}
+install -d $RPM_BUILD_ROOT{/lib/firmware,/boot}
 
-cp -p intel-microcode2ucode $RPM_BUILD_ROOT%{_sbindir}
 mv intel-ucode $RPM_BUILD_ROOT/lib/firmware
 
-cp -p intel-microcode2ucode-single $RPM_BUILD_ROOT%{_sbindir}
 install -d kernel/x86/microcode
 mv microcode.bin kernel/x86/microcode/GenuineIntel.bin
 echo kernel/x86/microcode/GenuineIntel.bin | cpio -o -H newc -R 0:0 > $RPM_BUILD_ROOT/boot/intel-ucode.img
@@ -69,10 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sbindir}/intel-microcode2ucode
 /lib/firmware/intel-ucode
 
 %files initrd
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sbindir}/intel-microcode2ucode-single
 /boot/intel-ucode.img
