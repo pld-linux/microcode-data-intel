@@ -6,13 +6,12 @@ Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
-Source0:	http://downloadmirror.intel.com/27431/eng/microcode-%{version}.tgz
+Source0:	https://downloadmirror.intel.com/27431/eng/microcode-%{version}.tgz
 # Source0-md5:	871df55f0ab010ee384dabfc424f2c12
 # Tool for splitting Intel's microcode file. From Fedora
 Source1:	intel-microcode2ucode.c
 # Produces single file for use by boot loader (like grub)
 Source2:	intel-microcode2ucode-single.c
-BuildRequires:	cpio
 Provides:	microcode-data
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,10 +38,9 @@ Mikrokod dla procesorów Intel dla initrd.
 %prep
 %setup -qc
 
-
 %build
 if ! grep -q 0x00000000 microcode.dat; then
-	echo >&2 microcode.dat contains giberrish
+	echo >&2 "microcode.dat contains giberrish"
 	exit 1
 fi
 
