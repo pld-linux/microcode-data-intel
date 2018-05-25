@@ -6,7 +6,7 @@ Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
-Source0:	https://downloadmirror.intel.com/27591/eng/microcode-%{version}.tgz
+Source0:	https://downloadmirror.intel.com/27776/eng/microcode-%{version}.tgz
 # Source0-md5:	99c80f9229554953a868127cda44e7e3
 Provides:	microcode-data
 BuildRequires:	iucode-tool
