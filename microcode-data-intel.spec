@@ -1,18 +1,15 @@
 Summary:	Microcode definitions for Intel processors
 Summary(pl.UTF-8):	Definicje mikrokodu dla procesorów Intela
 Name:		microcode-data-intel
-Version:	20180312
+Version:	20180425
 Release:	1
 License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 # http://downloadcenter.intel.com/, enter "processor microcode data file" to the search
 Source0:	https://downloadmirror.intel.com/27591/eng/microcode-%{version}.tgz
-# Source0-md5:	be315cd99a7ca392a2f917ceacbe14f2
-# Tool for splitting Intel's microcode file. From Fedora
-Source1:	intel-microcode2ucode.c
-# Produces single file for use by boot loader (like grub)
-Source2:	intel-microcode2ucode-single.c
+# Source0-md5:	99c80f9229554953a868127cda44e7e3
 Provides:	microcode-data
+BuildRequires:	iucode-tool
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,16 +36,8 @@ Mikrokod dla procesorów Intel dla initrd.
 %setup -qc
 
 %build
-if ! grep -q 0x00000000 microcode.dat; then
-	echo >&2 "microcode.dat contains giberrish"
-	exit 1
-fi
 
-%{__cc} %{rpmcflags} %{rpmcppflags} %{rpmldflags} -Wall -o intel-microcode2ucode %{SOURCE1}
-%{__cc} %{rpmcflags} %{rpmcppflags} %{rpmldflags} -Wall -o intel-microcode2ucode-single %{SOURCE2}
-
-./intel-microcode2ucode microcode.dat
-./intel-microcode2ucode-single microcode.dat
+%{_sbindir}/iucode_tool intel-ucode*/*-* --write-to=microcode.bin
 
 install -d kernel/x86/microcode
 ln microcode.bin kernel/x86/microcode/GenuineIntel.bin
@@ -66,8 +55,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc releasenote
 /lib/firmware/intel-ucode
 
 %files initrd
+%doc releasenote
 %defattr(644,root,root,755)
 /boot/intel-ucode.img
