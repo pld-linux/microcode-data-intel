@@ -7,8 +7,8 @@ License:	INTEL SOFTWARE LICENSE AGREEMENT
 Group:		Base
 Source0:	https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-%{version}.tar.gz
 # Source0-md5:	ad5fe712f54387c0737caef8131b4770
-Provides:	microcode-data
 BuildRequires:	iucode-tool
+Provides:	microcode-data
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,7 +35,6 @@ Mikrokod dla procesorów Intel dla initrd.
 %setup -q -n Intel-Linux-Processor-Microcode-Data-Files-microcode-%{version}
 
 %build
-
 %{_sbindir}/iucode_tool intel-ucode*/*-* -tb --write-to=microcode.bin
 
 install -d kernel/x86/microcode
@@ -58,6 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 /lib/firmware/intel-ucode
 
 %files initrd
-%doc releasenote
 %defattr(644,root,root,755)
+%doc releasenote
 /boot/intel-ucode.img
